@@ -1,0 +1,35 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+env.json
+
+# Flutter and Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+coverage/
+frontend/android/.gradle/
+frontend/android/local.properties
+frontend/ios/Flutter/ephemeral/
+
+# Node.js
+node_modules/
+npm-debug.log*
+web/dist/
+backend/.local/
+test-results/
+playwright-report/
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Supabase local development
+backend/supabase/.branches/
+backend/supabase/.temp/

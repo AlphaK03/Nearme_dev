@@ -1,0 +1,15 @@
+{
+  "name": "nearme-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local tooling for the NearMe Supabase backend.",
+  "scripts": {
+    "supabase": "supabase"
+  },
+  "devDependencies": {
+    "supabase": "^2.39.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,14 @@
+import { chromium } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const page = await browser.newPage({ viewport: { width: 512, height: 512 }, deviceScaleFactor: 1 });
+const svg = await readFile('web/public/icon.svg', 'utf8');
+await page.setContent(`<style>html,body{margin:0;background:#164f46;width:100%;height:100%}svg{display:block;width:100%;height:100%}</style>${svg}`);
+await page.screenshot({ path: 'web/public/icon-512.png' });
+await page.setViewportSize({ width: 192, height: 192 });
+await page.screenshot({ path: 'web/public/icon-192.png' });
+await page.setViewportSize({ width: 512, height: 512 });
+await page.addStyleTag({ content: 'svg{width:80%;height:80%;position:absolute;top:10%;left:10%}' });
+await page.screenshot({ path: 'web/public/icon-maskable.png' });
+await browser.close();
+console.log('Iconos PWA generados desde el logotipo vectorial.');
