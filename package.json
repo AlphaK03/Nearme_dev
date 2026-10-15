@@ -8,7 +8,7 @@
     "build": "vite build",
     "start": "node backend/src/server.mjs",
     "preview:url": "node scripts/preview-url.mjs",
-    "test": "node --test backend/test",
+    "test": "node --test backend/test web/test",
     "test:e2e": "playwright test"
   },
   "engines": {

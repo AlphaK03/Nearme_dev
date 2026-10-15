@@ -48,6 +48,19 @@ Después de actualizar el código, ejecutar `npm run build` y recargar la app. L
 
 Referencias: [cabeceras de dev tunnels](https://github.com/microsoft/dev-tunnels/issues/508), [bloqueos de imágenes de OpenStreetMap](https://wiki.openstreetmap.org/wiki/Blocked_tiles).
 
+## Recorrido animado y seguimiento GPS
+
+En **Mi recorrido**, el panel **Disfruta cada tramo** permite previsualizar el camino hasta cada parada o seguir el avance real con GPS.
+
+- **Vista previa** reproduce el tramo elegido sobre la geometría del itinerario. Se identifica como simulación, se puede pausar y no solicita ubicación ni completa visitas. Los botones numerados permiten cambiar de tramo.
+- **Seguir con GPS** solicita permiso y activa un solo observador mientras esta pantalla está visible. Se detiene al salir de Mi recorrido, al pulsar Detener GPS o al completar la última parada en rutas sin regreso. Al ocultar la app se pausa; al volver se vuelve a solicitar una lectura. No se activa por recargar una ruta guardada.
+- El mapa muestra la siguiente parada a escala cercana. Si se arrastra el mapa, deja de seguir al marcador hasta pulsar **Seguir marcador**. **Ver ruta completa** recupera la vista general.
+- Las posiciones con precisión peor que 65 m no mueven el marcador. Una señal desactualizada se indica expresamente. Fuera del tramo se muestra la coordenada real, sin forzarla al camino. La llegada se confirma manualmente con **Marcar parada visitada**.
+- Se reutilizan el mapa, los marcadores y la geometría calculada. El movimiento se dibuja a un máximo de 30 actualizaciones por segundo, los textos a 4 por segundo y la cámara se desplaza solo al salir del área central, como máximo una vez por segundo. Con movimiento reducido, la simulación usa pasos de 250 ms.
+- No se realizan llamadas adicionales a IA, búsquedas ni cálculo de rutas durante la animación. Las lecturas GPS permanecen en memoria del navegador; las imágenes del mapa se cargan conforme se muestran nuevas zonas. No se descargan mapas por adelantado.
+
+La precisión real depende del dispositivo y de la señal. Esta vista no proporciona instrucciones habladas ni seguimiento en segundo plano.
+
 ## Comparación de modelos
 
 El modelo predeterminado es `gpt-4.1`. Para volver al anterior, cambiar solo `OPENAI_MODEL=gpt-4.1-mini` en `backend/.env` y reiniciar el servidor. `/api/health` muestra el modelo activo, sin mostrar la clave.
